@@ -48,12 +48,12 @@ public class PedidosDAOHib implements PedidosDAO {
 
     @Override
     public pedidos get(Integer id) {
-        pedidos ara = new pedidos();
+        pedidos ped = new pedidos();
         Session s = HibernateUtil.getSessionFactory().openSession();
-        ara=s.get(pedidos.class, id);
+        ped=s.get(pedidos.class, id);
       
     
-            return ara;
+            return ped;
            
         }
     
@@ -84,7 +84,7 @@ public class PedidosDAOHib implements PedidosDAO {
     @Override
     public List<pedidos> PedidosHoy() {
              LocalDate todaysDate = LocalDate.now();
-        System.out.println(todaysDate);
+      
            Session s = HibernateUtil.getSessionFactory().openSession();
            s.beginTransaction();
            Criteria criteria = s.createCriteria(pedidos.class);

@@ -28,16 +28,14 @@ public class AplicacionHibernate {
     
     public static void main(String[] args) {
             LocalDate todaysDate = LocalDate.now();
-             pedidos  pedido = new pedidos();
-             
-        System.out.println(todaysDate);
-          Time  araa=new Time(System.currentTimeMillis());
+         
+          Time  TiempoActual=new Time(System.currentTimeMillis());
        
         
         limpiaPantalla();
 		
 		int opcion =1;
-		while (opcion!=9) {
+		while (opcion!=5) {
 	imprimirMenu();
 	
 	opcion=leerEntrada();
@@ -48,7 +46,7 @@ public class AplicacionHibernate {
     
     case 1:  opcion = 1;
      
-    			Meter( araa,  todaysDate);
+    			Meter( TiempoActual,  todaysDate);
              break;
     case 2:  opcion = 2;
     			Borrar();
@@ -61,7 +59,7 @@ public class AplicacionHibernate {
              break;
    
 
-	case 9:
+	case 5:
 	
 		System.out.println("Has salido del programa");
 		break;
@@ -69,7 +67,7 @@ public class AplicacionHibernate {
 			
 	} 
 		
-	if (opcion!=9) 
+	if (opcion!=5) 
 	System.out.println();
 	System.out.println("Pulse enter para continuar");
 	esperaPulsacion();
@@ -104,13 +102,10 @@ public class AplicacionHibernate {
 					 System.out.println("0 Ver todos los pedidos");
 					 System.out.println("1 Anadir pedido");
      			      System.out.println("2 Borrar pedido");
-     			      System.out.println("3 Marcar como recogido un producto");
+     			      System.out.println("3 Marcar como recogido un pedido");
      			      System.out.println("4 Pedidos de hoy");
-     			      System.out.println("5 Pedidos por cliente");
-     			      System.out.println("6 Numero de clientes");
-     			     System.out.println("7 Plato mas consumido");
-     			    System.out.println("8 Ingresos del ultimo mes");
-					System.out.println("9 Salir ");
+     			
+					System.out.println("5 Salir ");
 					System.out.println("************************************");
 					System.out.println("Introduzca una opción:");
 				}
@@ -119,9 +114,9 @@ public class AplicacionHibernate {
         
         
     private static void Meter(Time araa, LocalDate todaysDate){
-        carta_productosDAOHib miau = new carta_productosDAOHib();
-        
-         for (var aa : miau.getAll()){  System.out.println(aa); };
+        carta_productosDAOHib carta = new carta_productosDAOHib();
+        int aer=0;
+         for (var aa : carta.getAll()){  System.out.println(aer+++ " " +aa); };
     	   LocalDate fechaActual = LocalDate.now();
            
     	    Scanner sc = new Scanner(System.in);
@@ -131,22 +126,22 @@ public class AplicacionHibernate {
    
         p.setCliente(nombre);
         System.out.println("Introduce el numero del producto que desea" );
-        int aer=0;
-          for (var aa : miau.getAll()){  System.out.println(aer+++"  "+aa.getNombre()); };
-        
+
         int producto = sc.nextInt();
+        carta_productos produc = new carta_productos();
+        
         switch (producto){
         case 0:  producto = 0;
-        	
-        			p.setProducto_id(1);
+                                produc=carta.get(1);
+        			p.setProducto_id(produc);
                  break;
         case 1:  producto = 1;
-
-		p.setProducto_id(2);
+                 produc=carta.get(2);
+		p.setProducto_id(produc);
      break;
         case 2:  producto = 2;
-
-		p.setProducto_id(3);
+         produc=carta.get(3);
+         p.setProducto_id(produc);
      break;
         }
         
@@ -161,16 +156,12 @@ public class AplicacionHibernate {
         
     }
     
-    
-        
+      
         private static void TodosLosPedidos(){
              PedidosDAOHib a = new PedidosDAOHib();
                int aer=0;
           for (var aa : a.AllPedidos()){  System.out.println(aer+++"  "+aa); };
         }
-        
-        
-        
         
         
         private static void  Borrar(){
@@ -183,9 +174,9 @@ public class AplicacionHibernate {
                    System.out.println("escribe un numero de la lista");
                     Scanner sc = new Scanner(System.in);
                      int numeroelegido = sc.nextInt();
-                int ara  =  (int) PedidosID.get(numeroelegido);
+                int numero  =  (int) PedidosID.get(numeroelegido);
                      
-                        pedidoBorrar= a.get(ara);
+                        pedidoBorrar= a.get(numero);
                         a.delete(pedidoBorrar);
              
         }
@@ -203,13 +194,13 @@ public class AplicacionHibernate {
                    System.out.println("escribe un numero de la lista");
                     Scanner sc = new Scanner(System.in);
                      int numeroelegido = sc.nextInt();
-                int ara  =  (int) PedidosID.get(numeroelegido);
+                int numero  =  (int) PedidosID.get(numeroelegido);
                     
-                        pedidoActualizar= a.get(ara);
+                        pedidoActualizar= a.get(numero);
                         
                      pedidoActualizar.setEstado("Recogido");
                      a.update(pedidoActualizar);
-                     System.out.println(a.get(ara));
+                     System.out.println(a.get(numero));
             
         }
              private static void  PedidosHoy(){
@@ -218,29 +209,8 @@ public class AplicacionHibernate {
              }
               
           
-        
-
-        
-          carta_productosDAOHib errerer = new carta_productosDAOHib();
-         
        
-    
-    
-       
-      
-        
-    
-       
-        //
-       
-       
-        
-    
-        
-        
-    
-    }
-
+}
     
     
         

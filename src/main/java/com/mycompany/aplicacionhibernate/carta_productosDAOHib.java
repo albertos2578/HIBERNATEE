@@ -10,28 +10,11 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-/**
- *
- * @author FranciscoRomeroGuill
- */
+
 public class carta_productosDAOHib implements carta_productosDAO {
 
-    @Override
-    public void save(carta_productos u) {
-       Session s = HibernateUtil.getSessionFactory().openSession();
-            Transaction t = s.beginTransaction();
-            s.save(u);
-            t.commit();
-        }
-    
+ 
 
-    @Override
-    public void update(carta_productos u) {
-       Session s = HibernateUtil.getSessionFactory().openSession();
-            Transaction t = s.beginTransaction();
-            s.update(u);
-            t.commit();
-        }
     
 
     @Override
@@ -39,9 +22,6 @@ public class carta_productosDAOHib implements carta_productosDAO {
        Session s = HibernateUtil.getSessionFactory().openSession();
             return s.get(carta_productos.class,id);            
         }
-    
-
- 
     
 
     @Override

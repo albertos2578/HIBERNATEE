@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,8 +43,9 @@ public class pedidos implements Serializable {
      @Column(name="id_pedido")
      private Integer id_pedido;
     
-    @Column(name="producto_id")
-    private Integer producto_id;
+    @OneToOne(cascade= {CascadeType.ALL})
+    @JoinColumn(name="producto_id", referencedColumnName = "carta_id")
+    private carta_productos producto_id;
    
     
     @Column(name="cliente")
@@ -57,11 +60,16 @@ public class pedidos implements Serializable {
      @Column(name="hora")
     private Time hora;
 
-     
     @Override
     public String toString() {
         return "pedidos{" + "id_pedido=" + id_pedido + ", producto_id=" + producto_id + ", cliente=" + cliente + ", estado=" + estado + ", fecha=" + fecha + ", hora=" + hora + '}';
     }
+
+  
+     
+     
+
+    
 
      
     

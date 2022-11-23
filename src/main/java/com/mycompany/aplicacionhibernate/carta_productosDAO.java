@@ -9,8 +9,7 @@ import models.carta_productos;
 
 
 public interface carta_productosDAO {
-    public void save( carta_productos m);
-    public void update( carta_productos m);
+  
     public carta_productos get( Integer id);
  
     public List<carta_productos> getAll();
