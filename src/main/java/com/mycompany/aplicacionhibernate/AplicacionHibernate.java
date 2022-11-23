@@ -27,15 +27,11 @@ public class AplicacionHibernate {
      */
     
     public static void main(String[] args) {
-            LocalDate todaysDate = LocalDate.now();
-         
-          Time  TiempoActual=new Time(System.currentTimeMillis());
-       
-        
-        limpiaPantalla();
-		
-		int opcion =1;
-		while (opcion!=5) {
+LocalDate todaysDate = LocalDate.now();
+Time  TiempoActual=new Time(System.currentTimeMillis());
+        limpiaPantalla();	
+        int opcion =1;
+        while (opcion!=5) {
 	imprimirMenu();
 	
 	opcion=leerEntrada();
@@ -58,7 +54,6 @@ public class AplicacionHibernate {
 			PedidosHoy();
              break;
    
-
 	case 5:
 	
 		System.out.println("Has salido del programa");
@@ -74,46 +69,44 @@ public class AplicacionHibernate {
 		}
 	}
 	
-				public static void esperaPulsacion() {
-		// TODO Auto-generated method stub
-		Scanner sc = new Scanner(System.in);
-		sc.nextLine();
+public static void esperaPulsacion() {
+    // TODO Auto-generated method stub
+    Scanner sc = new Scanner(System.in);
+    sc.nextLine();
 				
 	}
 
-				public static int leerEntrada() {
-	Scanner sc = new Scanner(System.in);
-			int numero = sc.nextInt();
-			return numero;
+public static int leerEntrada() {
+Scanner sc = new Scanner(System.in);
+                int numero = sc.nextInt();
+                return numero;
 	}
-				private static void limpiaPantalla() {
+private static void limpiaPantalla() {
+        for (int i=0;i<200;i++) {
+                System.out.println();
+        }
+}
+					
 
-					
-					for (int i=0;i<200;i++) {
-						System.out.println();
-					}
-				}
-					
-				
-				public static void imprimirMenu() {
-					System.out.println("************************************");
-					System.out.println("************ Menu Principal ********");
-					System.out.println("************ Menu de Programas ********");
-					 System.out.println("0 Ver todos los pedidos");
-					 System.out.println("1 Anadir pedido");
-     			      System.out.println("2 Borrar pedido");
-     			      System.out.println("3 Marcar como recogido un pedido");
-     			      System.out.println("4 Pedidos de hoy");
-     			
-					System.out.println("5 Salir ");
-					System.out.println("************************************");
-					System.out.println("Introduzca una opción:");
-				}
+    public static void imprimirMenu() {
+            System.out.println("************************************");
+            System.out.println("************ Menu Principal ********");
+            System.out.println("************ Menu de Programas ********");
+             System.out.println("0 Ver todos los pedidos");
+             System.out.println("1 Anadir pedido");
+  System.out.println("2 Borrar pedido");
+  System.out.println("3 Marcar como recogido un pedido");
+  System.out.println("4 Pedidos de hoy");
+
+            System.out.println("5 Salir ");
+            System.out.println("************************************");
+            System.out.println("Introduzca una opción:");
+    }
       Scanner sc = new Scanner(System.in);
  
         
         
-    private static void Meter(Time araa, LocalDate todaysDate){
+    private static void Meter(Time horaa, LocalDate todaysDate){
         carta_productosDAOHib carta = new carta_productosDAOHib();
         int aer=0;
          for (var aa : carta.getAll()){  System.out.println(aer+++ " " +aa); };
@@ -146,7 +139,7 @@ public class AplicacionHibernate {
         }
         
         p.setFecha(fechaActual);
-        p.setHora(araa);
+        p.setHora(horaa);
         p.setEstado("En preparacion");
          PedidosDAOHib a = new PedidosDAOHib();
            
@@ -187,18 +180,18 @@ public class AplicacionHibernate {
           private static void  Actualizar(){
                 PedidosDAOHib a = new PedidosDAOHib();
                 ArrayList PedidosID = new ArrayList();
+                 int aer=0;
           for (var aae : a.AllPedidos()){PedidosID.add(aae.getId_pedido());}
               pedidos pedidoActualizar = new pedidos();
-     int aer=0;
+              
           for (var aa : a.AllPedidos()){  System.out.println(aer+++"  "+aa); };
                    System.out.println("escribe un numero de la lista");
                     Scanner sc = new Scanner(System.in);
                      int numeroelegido = sc.nextInt();
                 int numero  =  (int) PedidosID.get(numeroelegido);
-                    
-                        pedidoActualizar= a.get(numero);
-                        
+                     pedidoActualizar= a.get(numero);
                      pedidoActualizar.setEstado("Recogido");
+                     
                      a.update(pedidoActualizar);
                      System.out.println(a.get(numero));
             
